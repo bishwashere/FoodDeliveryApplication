@@ -25,6 +25,13 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
+    implementation 'org.testng:testng:6.9.6'
+
+    //testing
+    repositories { jcenter() }
+    dependencies { testCompile "org.mockito:mockito-core:1.+" }
 }
 
 test {
