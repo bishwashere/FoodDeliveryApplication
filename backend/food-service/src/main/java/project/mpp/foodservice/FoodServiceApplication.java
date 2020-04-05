@@ -25,7 +25,7 @@ public class FoodServiceApplication {
 
     @PostConstruct
     public void checkIfWorks(){
-        //repository.deleteAll();
+//        repository.deleteAll();
 
         service.create(new Food(null, "Biryani", 5.00, "Indian Cuisine best for hot weather.", "http://localhost:8081/swagger-ui.html#/food-item-resource", "restaurant1"));
 
