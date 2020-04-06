@@ -39,15 +39,14 @@ services:
 
   bk-food:
     image: bk-food
-    restart: always
     build:
       context: ./backend
     working_dir: /food-service
     container_name: food-c
     expose:
-      - "8080"
+      - "8084"
     ports:
-      - "8090:8080"
+      - "8084:8084"
     depends_on:
       - mysql
 

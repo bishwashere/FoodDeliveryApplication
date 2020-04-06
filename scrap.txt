@@ -1,0 +1,10 @@
+CONTAINER ID        NAME                CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+e795238b89ee        food-c              0.00%               0B / 0B               0.00%               0B / 0B             0B / 0B             0
+85f04b053931        mysql-c             1.86%               371.1MiB / 1.952GiB   18.56%              1.44kB / 0B         82.5MB / 1.28GB     38
+d12e8d54a239        webapp-c            0.00%               14.63MiB / 1.952GiB   0.73%               14.5kB / 647kB      35.9MB / 0B         11
+de8e66480b2e        userService         0.46%               208.5MiB / 1.952GiB   10.43%              195kB / 53.2kB      42.7MB / 4.1kB      44
+7002031de109        api-c               0.40%               218.1MiB / 1.952GiB   10.91%              33.9kB / 2.28MB     27MB / 0B           40
+
+
+
+
