@@ -5,7 +5,7 @@
                   <div class="col-sm-4 col-md-4">
                         <div class="zoomwrap mrgb-30">
                             <ul id="glasscase" class="gc-start">
-                              <li><img src="/dummy-food.jpg" alt="single-shop-02" /></li>
+                              <li><img :src="food.imageUrl" alt="single-shop-02" /></li>
                               
                             </ul>
                          </div> 

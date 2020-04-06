@@ -8,7 +8,7 @@ services:
       context: ./frontend-client
     container_name: webapp-c
     ports:
-      - "8080:8080"
+      - "8085:8085"
 
   api:
     image: api
@@ -22,20 +22,6 @@ services:
       - ~/.m2:/root/.m2
     ports:
       - "8081:8081"
-
-  mysql:
-    image: mysql
-    container_name: mysql-c
-    environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_USER: demo_java
-      MYSQL_PASSWORD: 1234
-      MYSQL_DATABASE: hello_java
-    volumes:
-      - ./backend/food-service/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-    ports:
-      - "3318:3306"
-    restart: always
 
   bk-food:
     image: bk-food
@@ -62,6 +48,22 @@ services:
     ports:
       - "8083:8083"
 
+  bk-order:
+    image: bk-order
+    restart: always
+    working_dir: /orderProcessingService
+    build:
+      context: ./orderProcessingService
+    volumes:
+      - ./orderProcessingService:/orderProcessingService
+    ports:
+      - "8082:8082"
+
+  mongo:
+    image: mongo:3.4.1
+    ports:
+      - '27017:27017'
+    
 #  bk-order:
 #    image: bk-order
 #    restart: always
