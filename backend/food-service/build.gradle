@@ -13,13 +13,23 @@ repositories {
 }
 
 dependencies {
+<<<<<<< HEAD
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
 
+=======
+//    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+//    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
+//
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.2.6.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+>>>>>>> 6de8aabf36d15391a370a56d225fe03aa7e749ca
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    //implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 }
 
 test {

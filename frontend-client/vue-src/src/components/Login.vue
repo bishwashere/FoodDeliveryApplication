@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="container">
-              <div class="row">
+        <div class="container container-height">
+              <div class="row" >
                 <div class="col-sm-12 col-md-12 mrgb-30">
                     <div class="heading-all mrgb-20">
                           <div class="clearfix">
@@ -12,22 +12,18 @@
                         <div class="row">
                         <div class="col-sm-6 col-md-6">
                           <div class="clearfix mrgb-30">
-                            <h3 class="mrgb-10">I am a new customer</h3>
-                            <h4 class="font-14 mrgb-10">Register Account</h4>
-                            <p class="mrgb-20">By creating an account you will be able to order faster, be up to date on  an order's
-                              status, keep track of the order you have previously made. </p>
-                            <!-- <a href="#" class="btn-all">Register</a>  -->
-                            <router-link class="btn-all" to="/signup">Register</router-link>
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6">
-                          <div class="clearfix mrgb-30">
-                            <h3 class="mrgb-10">I am a returning customer</h3>
-                            <form method="post" action="./">
+                            <h3 class="mrgb-10">Login</h3>
+                            <p v-if="errors.length" class="text-danger">
+                              <b>Please correct the following error(s):</b>
+                              <ul>
+                                <li v-for="error in errors"   :key="error.key">{{ error.value }}</li>
+                              </ul>
+                            </p>
+                            <form method="post" @submit="doSignup" action="./">
                               <span >Login Id or email address</span>
-                              <input type="text" name="email" class="form-control mrgt-10 mrgb-10"/>
+                              <input type="text" v-model="username"  name="username" class="form-control mrgt-10 mrgb-10"/>
                               <span class="mrgb-20">Password</span>
-                              <input type="password" name="loginpassword" class="form-control mrgt-10 mrgb-10" />
+                              <input type="password" v-model="password"  name="password" class="form-control mrgt-10 mrgb-10" />
                               <span>
                                 <router-link class="font-14 active-text" to="/forgot-password">Forget Password</router-link>
                             </span>
@@ -45,7 +41,86 @@
     </div>
 </template>
 <script>
-    export default ({
-        name:'Login'
-    })
+    export default {
+        name:'Login',
+        data(){
+
+           return {
+              errors:[],
+              username:null,
+              password:null
+            }
+        },
+        methods:{
+
+          doSignup:function(e){
+              this.errors = [];
+              var i = 0;
+              if (!this.username) {
+                this.errors.push({
+                    key:i++,
+                    value:'Username is required'
+                });
+              }
+              if (!this.password) {
+                this.errors.push({
+                    key:i++,
+                    value:'Password is required'
+                });
+              }
+              if (this.errors.length == 0) {
+
+                    var formData = new FormData();
+                        formData.append('username', this.username);
+                        formData.append('password', this.password);
+
+                        this.helper.request({
+                              type: 'post',
+                              withData:'json',
+                              url: this.api.getLoginApi(),
+                              dataType:'json',
+                              auth:false,
+                              data: formData,
+                              complete:()=>{
+                                this.helper.showMessage('danger','Invalid Username or Password');
+                              },
+                              success:(resp)=>{
+                                this.helper.request({
+                                type: 'get',
+                                withData:'json',
+                                url: this.api.getUserInfoByUsernameApi()+'/'+this.username,
+                                dataType:'json',
+                                complete:()=>{
+                                  this.helper.showMessage('danger','Error found');
+                                },
+                                success:(resp2)=>{
+
+                                  this.helper.showMessage('success','Login successfully.');
+                                  resp2.username = this.username;
+                                  resp2.userToken = resp.jwt;
+                                  this.helper.setUserInfo(resp2);
+
+                                  setTimeout(()=>{ 
+                                      if(resp2.role == this.helper.userRole.restaurant){
+                                        window.location.href = "/order/new";
+                                      }else if(resp2.role == this.helper.userRole.driver){
+                                        window.location.href = '/driver-dashboard';
+                                      }else{
+                                        window.location.href = "/";
+                                      }
+                                      
+                                   }, 1000);
+                                  
+                                }
+
+                        })
+
+                              }
+
+                        })
+              }
+              e.preventDefault();
+          }
+        }
+    }
 </script>

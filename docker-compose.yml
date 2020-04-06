@@ -1,0 +1,80 @@
+version: '3'
+
+services:
+  webapp:
+    image: webapp
+    restart: always
+    build:
+      context: ./frontend-client
+    container_name: webapp-c
+    ports:
+      - "8080:8080"
+
+  api:
+    image: api
+    restart: always
+    working_dir: /storefront
+    build:
+      context: ./storefront
+    container_name: api-c
+    volumes:
+      - ./storefront/storefront:/storefront
+      - ~/.m2:/root/.m2
+    ports:
+      - "8081:8081"
+
+  mysql:
+    image: mysql
+    container_name: mysql-c
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_USER: demo_java
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: hello_java
+    volumes:
+      - ./backend/food-service/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "3318:3306"
+    restart: always
+
+  bk-food:
+    image: bk-food
+    restart: always
+    build:
+      context: ./backend
+    working_dir: /food-service
+    container_name: food-c
+    expose:
+      - "8080"
+    ports:
+      - "8090:8080"
+    depends_on:
+      - mysql
+
+  bk-user:
+    image: bk-user
+    restart: always
+    working_dir: /userService
+    build:
+      context: ./userService
+    container_name: userService
+    volumes:
+      - ./userService:/userservice
+    ports:
+      - "8083:8083"
+
+#  bk-order:
+#    image: bk-order
+#    restart: always
+#    build:
+#      context: ./food-service
+#    working_dir: /food-service
+#    container_name: food-service
+#    volumes:
+#      - /Users/bish/.gradle/:/home/gradle/.gradle
+#    expose:
+#      - "8080"
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - mysql-service

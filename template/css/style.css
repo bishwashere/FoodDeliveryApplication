@@ -1105,3 +1105,11 @@ border-bottom:none;
 {
 	float: right;
 }
+.top-right-new li a{
+	   padding: 7px 5px;
+    display: inline-block;
+    color: #fff;
+}
+.top-right-new li .dropdown-menu a{
+	color: #000;
+}
