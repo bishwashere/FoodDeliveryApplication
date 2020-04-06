@@ -21,7 +21,22 @@ public class UserServiceApplication {
 
 	@PostConstruct
 	public void constructDb(){
-		userRepo.save(new User(null, "pizzaCorner", "pizzacorner" , UserRole.RESTAURANT.toString(), "Pizza Corner", "", "pizzacorner@pizza.com", "100N Fourth Street", "Fairfield", "Iowa", 52557, "3234", ""));
+
+		userRepo.deleteAll();
+
+		userRepo.save(new User(null, "user1", "user1" , UserRole.CUSTOMER.toString(), "User1", "User1", "user1@gmail.com", "1000N Fourth Street", "Fairfield", "Iowa", 52557, "32341", ""));
+
+		userRepo.save(new User(null, "user2", "user2" , UserRole.CUSTOMER.toString(), "User2", "User2", "user2@gmail.com", "1000N Fourth Street", "Fairfield", "Iowa", 52557, "32342", ""));
+
+		userRepo.save(new User("restaurant1", "restaurant1", "restaurant1" , UserRole.RESTAURANT.toString(), "restaurant1", "restaurant1", "restaurant1@gmail.com", "1000N Fourth Street", "Fairfield", "Iowa", 52557, "323411", ""));
+
+		userRepo.save(new User("restaurant2", "restaurant2", "restaurant2" , UserRole.RESTAURANT.toString(), "restaurant2", "restaurant2", "restaurant2@gmail.com", "1000N Fourth Street", "Fairfield", "Iowa", 52557, "323422", ""));
+
+		userRepo.save(new User(null, "driver1", "driver1" , UserRole.DRIVER.toString(), "driver1", "driver1", "driver1@gmail.com", "1000N Fourth Street", "Fairfield", "Iowa", 52557, "32342211", ""));
+
+
 	}
+
+
 
 }

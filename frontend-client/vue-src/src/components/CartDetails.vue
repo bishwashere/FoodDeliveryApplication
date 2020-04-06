@@ -24,7 +24,7 @@
                         </thead>
                         <tbody>
                           <tr v-for="(food,index) in cartItems" :key="index">
-                            <td class="cart-prdimg"><a href="./"><img height="80px" src="/dummy-food.jpg" alt="rice"></a></td>
+                            <td class="cart-prdimg"><a href="./"><img height="80px" width="80px" :src="food.details.imageUrl" alt="rice"></a></td>
                             <td><a href="./" class="active-link">{{food.details.name}}</a></td>
                             <td>${{food.details.price}}</td>
                             <td>

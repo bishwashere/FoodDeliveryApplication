@@ -7,7 +7,8 @@
                         <div class="p-item mrgb-30">
                           <div class="">
                                   <router-link :to="{path: '/foods/' + food.id}" >
-                                  <img alt="3" src="/dummy-food.jpg">
+                                  <!-- <img alt="3" src="/dummy-food.jpg"> -->
+                                  <img height="300" width="100%" alt="3" :src="food.imageUrl">
                                 </router-link>
                                 </div>
                             <div class="p-item-info">
