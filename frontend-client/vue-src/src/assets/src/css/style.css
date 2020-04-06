@@ -1101,3 +1101,56 @@ border-bottom:none;
 	.top-links ul li a{display:block;font-size:12px;padding:3px 3px 3px 10px;border-bottom:1px solid #eee; text-align:left; color:#454545;}
 	.top-links ul li:last-child a{border-bottom:none;}
 }
+.pull-right li
+{
+	float: right;
+}
+.top-right-new li a{
+	padding: 7px 5px;
+    display: inline-block;
+    color: #fff;
+}
+.top-right-new li a:hover{
+    color: #3ebbeb;
+}
+.top-right-new li .dropdown-menu a{
+	color: #000;
+}
+.wrap-word{
+	white-space: nowrap;
+}
+.global-message{
+	padding: 15px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border-radius: 5px;
+}
+.global-message .error-heading,.global-message .success-heading{
+	display: none;
+	
+}
+.bg-success{
+	color: #006d00;
+	background: #72c772;
+}
+.bg-danger{
+	background: #f99797;
+	color: #8a0000
+}
+.container-height{
+	min-height: 580px;
+}
+.router-link-active{
+	font-weight: bold;
+}
+.btn-accepted{
+	background: rgba(255, 255, 255, 0);
+    border: rgba(255, 255, 255, 0);
+    color: #5cb85c;
+}
+.btn-rejected{
+	background: rgba(255, 255, 255, 0);
+    border: rgba(255, 255, 255, 0);
+    color: #b85c5c;
+}

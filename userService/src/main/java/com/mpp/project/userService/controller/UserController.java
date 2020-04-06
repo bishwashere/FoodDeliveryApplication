@@ -1,5 +1,6 @@
 package com.mpp.project.userService.controller;
 
+import com.mpp.project.userService.Exception.UserNotFoundException;
 import com.mpp.project.userService.model.User;
 import com.mpp.project.userService.model.UserRole;
 import com.mpp.project.userService.service.UserRepository;
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,17 +23,31 @@ public class UserController {
 		return user;
 	}
 
+	@PostMapping(value = "/update/{username}")
+	public User updateUser(@RequestBody User user, @PathVariable String username){
+
+		User userdb = userRepo.findByUsername(username);
+		if(userdb == null) throw new UserNotFoundException("User with username "+ username +"not found.");
+		userdb.setFirstName(user.getFirstName());
+		userdb.setLastName(user.getLastName());
+		userdb.setEmail(user.getEmail());
+		userdb.setPhone(user.getPhone());
+		final User updatedUser = userRepo.save(userdb);
+		return updatedUser;
+	}
+	
 	@GetMapping(path = "/all")
 	public Iterable<User> getAllUsers(){
 		return userRepo.findAll();
 	}
 
 	@GetMapping(path = "/{id}")
-	public Optional<User> getUserById(@PathVariable int id){
+	public Optional<User> getUserById(@PathVariable String id)
+	{
 		return userRepo.findById(id);
 	}
 
-	@GetMapping(path = "/singleUser/{username}")
+	@GetMapping(path = "/singleuser/{username}")
 	public User getUserByUsername(@PathVariable String username){
 		Iterable<User> users =  userRepo.findAll();
 		for(User u: users){
@@ -95,4 +109,19 @@ public class UserController {
 		}
 		return admins;
 	}
+
+	@GetMapping(value = "/delete/{id}")
+	public Optional<User> deleteUserById(@PathVariable("id") String id){
+		Optional<User> user = getUserById(id);
+		userRepo.deleteById(id);
+		return user;
+	}
+
+	@PostMapping(value = "/usersbyids")
+	public Iterable<User> getAllUsersByIds(@RequestBody List<String> ids){
+		return userRepo.findAllById(ids);
+	}
+
+
+
 }
