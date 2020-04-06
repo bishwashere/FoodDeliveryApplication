@@ -20,9 +20,9 @@
         <li>
             <router-link to="/order/active">Active orders</router-link>
         </li>
-        <li>
+        <!-- <li>
           <router-link to="/order/rejected">Rejected orders</router-link>
-        </li>
+        </li> -->
       </ul>
       <ul class="nav navbar-nav pull-right">
           <li>

@@ -266,6 +266,7 @@ module.exports = class Helper {
                                                 
                                             }
                                     }else{
+                                        
                                             ajaxParms['data'] = JSON.stringify(params.data);
                                     }
                                     

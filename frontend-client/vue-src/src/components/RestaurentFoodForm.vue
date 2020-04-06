@@ -105,7 +105,7 @@ export default {
                               },
                               success:()=>{
 
-                                this.showMessage('Product has been added successfully.');
+                                this.helper.showMessage('success','Product has been added successfully.');
                                 this.name = null;
                                 this.price = null;
                                 this.imageUrl = null;

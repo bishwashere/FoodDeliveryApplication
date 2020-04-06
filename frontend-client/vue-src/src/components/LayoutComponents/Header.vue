@@ -31,11 +31,15 @@
                           </li>
                           <li v-if="checkLogin()">
                              <a href ="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             Account({{getUserName()}})
+                             Hello {{getUserName()}} ({{helper.getUserInfo().role}})
                              </a>
                              <div class="dropdown-menu">
                                 <router-link class="dropdown-item" to="/profile">
                                     <span class="wrap-word"><i class="fa fa-user" aria-hidden="true"></i> Your Profile</span>
+                                </router-link>
+                                <div class="dropdown-divider"></div>
+                                <router-link v-if="helper.userRole.user == helper.getUserInfo().role" class="dropdown-item" to="/order-history">
+                                    <span class="wrap-word"><i class="fa fa-list" aria-hidden="true"></i> Your Order History</span>
                                 </router-link>
                                 <div class="dropdown-divider"></div>
                                 <router-link class="dropdown-item" to="/passwordchange">
@@ -56,7 +60,8 @@
                     <div class="row">
                         <div class="col-xs-8 col-sm-3 col-sm-3">
                             <div class="logo">
-                                <router-link to="/"><img src="/logo.png" alt="logo"></router-link>
+
+                                <router-link :to="getHomeLink()"><img src="/logo.png" alt="logo"></router-link>
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -136,6 +141,17 @@
             }
           }
           return false;
+      },
+      getHomeLink:function(){
+        if(this.helper.getUserInfo().userToken == ''){
+            return '/login';
+        }else if(this.helper.getUserInfo().role == this.helper.userRole.user){
+          return '/';
+        }else if(this.helper.getUserInfo().role == this.helper.userRole.restaurant){
+          return '/order/new';
+        }else{
+          return '/driver-dashboard';
+        }
       }
     }
   }

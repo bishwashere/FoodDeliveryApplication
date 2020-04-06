@@ -19,13 +19,18 @@
                               <ul>
                                 <li v-for="error in errors"   :key="error.key">{{ error.value }}</li>
                               </ul>
-                            </p>                         
+                            </p> 
+                            <div v-if="role == 'CUSTOMER' || role=='DRIVER'">                        
                             <label >First Name<Required/></label>
                             <input type="text" v-model="firstName" name="firstName" class="form-control mrgt-10 mrgb-10"/>
-                          
-                            <label>Last Name<Required/></label>
-                            <input type="text" v-model="lastName"  name="lastName" class="form-control mrgt-10 mrgb-10"/>
                             
+                            <label >Last Name<Required/></label>
+                            <input  type="text" v-model="lastName"  name="lastName" class="form-control mrgt-10 mrgb-10"/>
+                            </div>
+                            <div v-if="role=='RESTAURANT'"> 
+                              <label >Restaurent Name<Required/></label>
+                            <input type="text" v-model="firstName" name="firstName" class="form-control mrgt-10 mrgb-10"/>
+                          </div>
                             <label>Email<Required/></label>
                             <input type="email" v-model="email" name="email" class="form-control mrgt-10 mrgb-10"/>
                             
@@ -88,6 +93,7 @@ export default {
     methods:{
     getRole:function(route){
       var utype = route.params.usertype;
+
       var userRole = this.helper.userRole.user;
         if(utype == 'restaurent'){
             userRole = this.helper.userRole.restaurant;
@@ -112,13 +118,15 @@ export default {
             key:i++,
             value:'First name is required.'
         });
-      }
+      } 
+if(!this.role=="RESTAURANT"){
       if (!this.lastName) {
         this.errors.push({
             key:i++,
             value:'Last name is required.'
         });
       }
+    }
       if (!this.email) {
         this.errors.push({
             key:i++,
@@ -154,6 +162,8 @@ export default {
             //DRIVER, RESTAURANT, CUSTOMER, ADMIN
             var formData = new FormData();
             formData.append('firstName', this.firstName);
+            console.log(this.role); 
+            if(this.role=="RESTAURANT") formData.append('lastName', this.firstName);
             formData.append('lastName', this.lastName);
             formData.append('email', this.email);
             formData.append('phoneNumber', this.phoneNumber);
@@ -170,7 +180,7 @@ export default {
                   dataType:'json',
                   data: formData,
                   success:()=>{
-                    this.$router.push('/message');
+                    this.$router.push('/login');
                   },
                   error:()=>{
                       alert('request not completed.');

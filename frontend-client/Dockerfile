@@ -15,5 +15,5 @@ COPY vue-src .
 # build app for production with minification
 RUN npm run build
 
-EXPOSE 8085
+EXPOSE 8080
 CMD [ "http-server", "dist" ]

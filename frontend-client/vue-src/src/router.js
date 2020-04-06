@@ -15,6 +15,8 @@ import RestaurentOrderList from './components/RestaurentOrderList.vue'
 import CantactUs from './components/contact-us.vue'
 import ManageRestaurentFood from './components/ManageRestaurentFood.vue'
 import RestaurentFoodForm from './components/RestaurentFoodForm.vue'
+import UserOrderHistory from './components/UserOrderHistory.vue'
+import DriverDashboard from './components/DriverDashboard.vue'
 
 Vue.use(Router)
 
@@ -102,6 +104,16 @@ export default new Router({
 			path:'/restaurent-update-food/:foodId',
 			name:'RestaurentFoodForm',
 			component:RestaurentFoodForm
+		},
+		{  
+			path:'/order-history',
+			name:'UserOrderHistory',
+			component:UserOrderHistory
+		},
+		{  
+			path:'/driver-dashboard',
+			name:'DriverDashboard',
+			component:DriverDashboard
 		}
 	],
 	duplicateNavigationPolicy: 'reload'

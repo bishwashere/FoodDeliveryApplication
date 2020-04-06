@@ -103,6 +103,8 @@
                                   setTimeout(()=>{ 
                                       if(resp2.role == this.helper.userRole.restaurant){
                                         window.location.href = "/order/new";
+                                      }else if(resp2.role == this.helper.userRole.driver){
+                                        window.location.href = '/driver-dashboard';
                                       }else{
                                         window.location.href = "/";
                                       }

@@ -31,13 +31,34 @@ module.exports = class Api {
 	}
 	// Order restaurent service
 	getRestaurentPendingOrderApi(){
-		return this.getHostUrl()+'/orders/restaurants/pendingOrders';//+{restaurantId}
+		return this.getHostUrl()+'/orders/restaurants/pending';//+{restaurantId}
 	}
 	getRestaurentAddFoodApi(){
 		return this.getHostUrl()+'/foods/new';
 	}
 	getDeleteFoodApi(){
 		return this.getHostUrl()+'/foods/delete';//+{id}
+	}
+	getAllFoodsByIdsApi(){
+		return this.getHostUrl()+'/foods/foodsByIds';//post method
+	}
+	getAllUsersByIdsApi(){
+		return this.getHostUrl()+'/users/usersbyids';//post method
+	}
+	getRestaurentOrderRejectApi(){
+		return this.getHostUrl()+'/orders/restaurants/reject';//{orderId}
+	}
+	getRestaurentOrderAcceptApi(){
+		return this.getHostUrl()+'/orders/restaurants/accept';//{orderId}
+	}
+	getRestaurentActiveOrderApi(){
+		return this.getHostUrl()+'/orders/restaurants/active';//+{restaurantId}
+	}
+	getRestaurentRejectedOrderApi(){
+		return this.getHostUrl()+'/orders/restaurants/reject';//+{restaurantId}
+	}
+	getCustomerOrderApi(){
+		return this.getHostUrl()+'/orders/customers';//+{customerId}
 	}
 
 	//http://localhost:8081/foods/89

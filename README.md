@@ -1,5 +1,9 @@
 ###How to run
 
-docker-compose up
+# FoodDeliveryApplication
+A food delivery application based on microservices. Built with Java and Spring.
 
-http://localhost:8081/swagger-ui.html
+<b>How to run</b>
+- Go to the root up the project 
+- docker-compose up
+

@@ -23,7 +23,7 @@
                     <td><img height="120" v-bind:alt="food.name" src="/dummy-food.jpg"></td>
                     <td width="120">
                       <!-- <a href="" class="btn btn-xs btn-primary">Edit</a> -->
-                      <button v-on:click="deleteFood(food.id,$events)" class="btn btn-xs btn-danger">Delete</button>
+                      <button v-on:click="deleteFood(food.id,$event)" class="btn btn-xs btn-danger">Delete</button>
                     </td>
                   </tr>
                 </tbody>

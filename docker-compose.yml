@@ -4,13 +4,9 @@ services:
   webapp:
     image: webapp
     restart: always
-    working_dir: /vue-src
     build:
       context: ./frontend-client
     container_name: webapp-c
-    volumes:
-      - ./frontend-client/vue-src:/vue-src
-      - ~/.m2:/root/.m2
     ports:
       - "8080:8080"
 

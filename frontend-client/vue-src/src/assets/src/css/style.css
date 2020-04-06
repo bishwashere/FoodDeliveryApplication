@@ -1144,3 +1144,13 @@ border-bottom:none;
 .router-link-active{
 	font-weight: bold;
 }
+.btn-accepted{
+	background: rgba(255, 255, 255, 0);
+    border: rgba(255, 255, 255, 0);
+    color: #5cb85c;
+}
+.btn-rejected{
+	background: rgba(255, 255, 255, 0);
+    border: rgba(255, 255, 255, 0);
+    color: #b85c5c;
+}
