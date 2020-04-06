@@ -37,14 +37,14 @@ public class UserController {
 	}
 	
 	@GetMapping(path = "/all")
-	public Iterable<User> getAllUsers(){
+	public List<User> getAllUsers(){
 		return userRepo.findAll();
 	}
 
 	@GetMapping(path = "/{id}")
-	public Optional<User> getUserById(@PathVariable String id)
+	public User getUserById(@PathVariable String id)
 	{
-		return userRepo.findById(id);
+		return userRepo.findById(id).orElseThrow(()->new UserNotFoundException("User with"+id+" not fount"));
 	}
 
 	@GetMapping(path = "/singleuser/{username}")
@@ -59,7 +59,7 @@ public class UserController {
 	}
 
 	@GetMapping(path = "/restaurants")
-	public Iterable<User> getAllRestaurants(){
+	public List<User> getAllRestaurants(){
 		List<User> restaurants = new ArrayList<>();
 		List<User> allUsers = userRepo.findAll();
 		for(User u: allUsers){
@@ -72,7 +72,7 @@ public class UserController {
 	}
 
 	@GetMapping(path = "/drivers")
-	public Iterable<User> getAllDrivers(){
+	public List<User> getAllDrivers(){
 		List<User> drivers = new ArrayList<>();
 		List<User> allUsers = userRepo.findAll();
 		for(User u: allUsers){
@@ -85,7 +85,7 @@ public class UserController {
 	}
 
 	@GetMapping(path ="/customers")
-	public Iterable<User> getAllCustomers(){
+	public List<User> getAllCustomers(){
 		List<User> customers = new ArrayList<>();
 		List<User> allUsers = userRepo.findAll();
 		for(User u: allUsers){
@@ -98,7 +98,7 @@ public class UserController {
 	}
 
 	@GetMapping(path ="/admins")
-	public Iterable<User> getAllAdmins(){
+	public List<User> getAllAdmins(){
 		List<User> admins = new ArrayList<>();
 		List<User> allUsers = userRepo.findAll();
 		for(User u: allUsers){
@@ -111,8 +111,8 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/delete/{id}")
-	public Optional<User> deleteUserById(@PathVariable("id") String id){
-		Optional<User> user = getUserById(id);
+	public User deleteUserById(@PathVariable("id") String id) {
+		User user = userRepo.findById(id).orElseThrow(()-> new UserNotFoundException( "User with id " + id + "not found."));
 		userRepo.deleteById(id);
 		return user;
 	}
